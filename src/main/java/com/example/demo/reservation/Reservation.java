@@ -2,13 +2,13 @@ package com.example.demo.reservation;
 
 import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 @Data
-public class Reservation {
+public class Reservation implements Serializable {
 
     @Setter(AccessLevel.PRIVATE)
     private Integer id;

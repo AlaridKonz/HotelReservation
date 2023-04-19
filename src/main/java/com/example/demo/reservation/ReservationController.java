@@ -2,8 +2,6 @@ package com.example.demo.reservation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
 import java.util.*;
 
 @RestController
@@ -21,12 +19,12 @@ public class ReservationController {
     }
 
     @PostMapping
-    public void createReservation(@RequestBody ReservationPayload payload){
+    public void createReservation(@RequestBody ReservationPayload payload) throws Exception {
         reservationService.createReservation(payload);
     }
 
     @PutMapping
-    public void updateReservation(@RequestParam Integer id, @RequestBody ReservationPayload payload){
+    public void updateReservation(@RequestParam Integer id, @RequestBody ReservationPayload payload) throws Exception {
         reservationService.updateReservation(id, payload);
     }
 }
