@@ -44,9 +44,9 @@ public class ReservationStorage {
     }
 
 
-    public boolean reservationAlreadyExistsByRoomAndDate(Integer roomNumber, List<LocalDate> dates){
+    public boolean reservationAlreadyExistsByRoomAndDate(Integer id, Integer roomNumber, List<LocalDate> dates){
         return reservations.stream().anyMatch(reservation ->
-                Objects.equals(reservation.getRoomNumber(), roomNumber) && reservation.getReservationDates().stream().anyMatch(dates::contains));
+                !reservation.getId().equals(id) && reservation.getRoomNumber().equals(roomNumber) && reservation.getReservationDates().stream().anyMatch(dates::contains));
     }
 
     public Integer getNextIndex(){

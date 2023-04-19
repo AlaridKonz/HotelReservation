@@ -21,7 +21,7 @@ public class ReservationService {
 
     public void createReservation(ReservationPayload payload) throws Exception {
         checkForNull                    (payload.getRoomNumber(), payload.getClientFullName(), payload.getReservationDates());
-        checkForRoomDateAvailability    (payload.getRoomNumber(), payload.getReservationDates());
+        checkForRoomDateAvailability    (-1, payload.getRoomNumber(), payload.getReservationDates());
         checkForEmptyString             (payload.getClientFullName());
         checkForPastDates               (payload.getReservationDates());
         checkForListSizeHigherThanZero  (payload.getReservationDates());
@@ -39,7 +39,7 @@ public class ReservationService {
     }
 
     public void updateReservation(Integer id, ReservationPayload payload) throws Exception {
-        checkForRoomDateAvailability(payload.getRoomNumber(), payload.getReservationDates());
+        checkForRoomDateAvailability    (id, payload.getRoomNumber(), payload.getReservationDates());
         checkForEmptyString             (payload.getClientFullName());
         checkForPastDates               (payload.getReservationDates());
         checkForListSizeHigherThanZero  (payload.getReservationDates());
@@ -98,8 +98,8 @@ public class ReservationService {
         }
     }
 
-    private void checkForRoomDateAvailability(Integer roomNumber, List<LocalDate> days) throws Exception {
-        if(reservationStorage.reservationAlreadyExistsByRoomAndDate(roomNumber, days)){
+    private void checkForRoomDateAvailability(Integer id, Integer roomNumber, List<LocalDate> days) throws Exception {
+        if(reservationStorage.reservationAlreadyExistsByRoomAndDate(id, roomNumber, days)){
             throw new Exception("Reservation for room " + roomNumber + " already exists on one or more of the days selected.");
         }
     }
